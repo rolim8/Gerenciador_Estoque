@@ -26,5 +26,10 @@ O **Gerenciador de Saída de Estoque** é uma aplicação web simples que facili
 - **CSS3**: Estilização e layout.
 - **JavaScript**: Interatividade e lógica do aplicativo.
 
+## Acesso
+
+Você pode acessar a aplicação web diretamente [aqui](https://rolim8.github.io/Gerenciador_Estoque/).
+
 ## Licença
+
 Este projeto é licenciado sob a Licença MIT.
