@@ -1,10 +1,30 @@
 # Gerenciador de Saída de Estoque
 
-Um aplicativo simples para gerenciar a saída de estoque de equipamentos de telecomunicações. O aplicativo permite que os usuários adicionem, visualizem e imprimam informações relacionadas à saída de estoque, incluindo detalhes sobre roteadores, ONUs, fios e conectores.
+O **Gerenciador de Saída de Estoque** é uma aplicação web simples que facilita o gerenciamento da saída de equipamentos de telecomunicações. O sistema permite que os usuários insiram e visualizem informações sobre roteadores, ONUs, fios e conectores, além de gerar e imprimir relatórios detalhados.
 
 ## Funcionalidades
 
-- **Formulário de Entrada**: Permite inserir informações sobre o técnico, data, roteador, MAC do roteador, ONU, MAC da ONU, quantidade de fios e conectores.
-- **Adicionar Linhas Adicionais**: Usuários podem adicionar linhas adicionais conforme necessário.
-- **Gerar Relatório**: Gera um recibo com as informações inseridas, exibindo-as em caixa alta.
-- **Impressão**: Permite imprimir o recibo gerado.
+- **Formulário de Entrada**: 
+  - Selecione o técnico responsável.
+  - Informe a data da saída.
+  - Adicione detalhes sobre o roteador, incluindo o nome e o MAC.
+  - Adicione detalhes sobre a ONU, incluindo o nome e o MAC.
+  - Informe a quantidade de fios e conectores.
+  
+- **Adicionar Linhas Adicionais**: 
+  - Adicione linhas extras conforme necessário para informações adicionais.
+  
+- **Gerar Relatório**: 
+  - Gere um recibo com as informações inseridas, exibidas em caixa alta.
+  
+- **Impressão**: 
+  - Imprima o recibo gerado diretamente do navegador.
+
+## Tecnologias Utilizadas
+
+- **HTML5**: Estrutura básica do conteúdo.
+- **CSS3**: Estilização e layout.
+- **JavaScript**: Interatividade e lógica do aplicativo.
+
+## Licença
+Este projeto é licenciado sob a Licença MIT.
