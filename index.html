@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <link href="style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="icon.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-fields">
+        <h2>Gerenciador de Saída de Estoque</h2>
+
+        <!-- Campos para técnico e data -->
+        <div class="input-group">
+          <select id="tecnico">
+            <option value="">//--- selecione uma opção ---//</option>
+            <option value="DANILO">DANILO</option>
+            <option value="ITILIO">ITILIO</option>
+            <option value="MATHEUS">MATHEUS</option>
+            <option value="ROMARIO">ROMARIO</option>
+          </select>
+          <input type="date" id="data" />
+        </div>
+
+        <!-- Campos para roteador, MAC, ONU e MAC -->
+        <div class="input-group">
+          <input type="text" id="roteador" placeholder="Roteador" />
+          <input type="text" id="macRoteador" placeholder="MAC do Roteador" />
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="onu" placeholder="ONU" />
+          <input type="text" id="macOnu" placeholder="MAC da ONU" />
+        </div>
+
+        <!-- Campos para fios e conectores -->
+        <input
+          type="number"
+          id="fios"
+          placeholder="Quantidade de fios (metros)"
+        />
+        <input
+          type="number"
+          id="conectores"
+          placeholder="Quantidade de conectores"
+        />
+
+        <!-- Botão para adicionar novas linhas -->
+        <button type="button" class="add-line-button" onclick="addNewLine()">
+          Adicionar Nova Linha
+        </button>
+
+        <!-- Seção para novas linhas -->
+        <div id="additionalLines"></div>
+
+        <!-- Botões -->
+        <div class="buttons-container">
+          <button onclick="generateReceipt()">Gerar Relatorio</button>
+          <button
+            onclick="printReceipt()"
+            id="printButton"
+            style="display: none"
+          >
+            Imprimir Relatorio
+          </button>
+        </div>
+      </div>
+
+      <!-- Seção onde o recibo gerado será exibido -->
+      <div id="receipt" class="receipt" style="display: none">
+        <div class="receipt-header">
+          <div>
+            <img
+              name="Logo"
+              class="logo"
+              src="logo.png"
+              height="50"
+              width="auto"
+              usemap="#Map"
+            />
+            <div class="company-info">
+              O.S. Net Telecom<br />
+              Rua Terencio Correia Ferrer, 299<br />
+              Lavras da Mangabeira - Ceará<br />
+              Telefones: (88) 99713-8306<br />
+              (88) 99290-0506
+            </div>
+          </div>
+          <div>
+            <div class="value-box">SAÍDA DE ESTOQUE</div>
+            <br />
+            <div class="value-box">
+              Técnico<br />
+              <span id="receiptTecnico">DANILO</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="receipt-body">
+          <p>
+            ROTEADOR <span id="receiptRoteador"></span> com MAC:
+            <span id="receiptMacRoteador"></span>
+          </p>
+          <p>
+            ONU <span id="receiptOnu"></span> com MAC:
+            <span id="receiptMacOnu"></span>
+          </p>
+          <p><span id="receiptFios"></span> METROS DE FIO</p>
+          <p><span id="receiptConectores"></span> CONECTORES</p>
+
+          <!-- Se houver linhas adicionais -->
+          <div id="additionalReceiptLines"></div>
+        </div>
+
+        <div class="receipt-footer">
+          Saída do estoque em <span id="receiptData">(DATA)</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Função para formatar a data no formato DD/MM/YYYY
+      function formatDate(dateString) {
+        const [year, month, day] = dateString.split("-");
+        return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${year}`;
+      }
+
+      // Função para gerar o recibo
+      function generateReceipt() {
+        // Obtém os valores dos campos do formulário e converte para caixa alta
+        const tecnico = document.getElementById("tecnico").value.toUpperCase();
+        const data = document.getElementById("data").value;
+        const roteador = document
+          .getElementById("roteador")
+          .value.toUpperCase();
+        const macRoteador = document
+          .getElementById("macRoteador")
+          .value.toUpperCase();
+        const onu = document.getElementById("onu").value.toUpperCase();
+        const macOnu = document.getElementById("macOnu").value.toUpperCase();
+        const fios = document.getElementById("fios").value.toUpperCase();
+        const conectores = document
+          .getElementById("conectores")
+          .value.toUpperCase();
+
+        // Preenche os campos do recibo com as informações do formulário
+        document.getElementById("receiptRoteador").textContent =
+          roteador || "(ROTEADOR)";
+        document.getElementById("receiptMacRoteador").textContent =
+          macRoteador || "(MAC DO ROTEADOR)";
+        document.getElementById("receiptOnu").textContent = onu || "(ONU)";
+        document.getElementById("receiptMacOnu").textContent =
+          macOnu || "(MAC DA ONU)";
+        document.getElementById("receiptFios").textContent =
+          fios || "(QUANTIDADE)";
+        document.getElementById("receiptConectores").textContent =
+          conectores || "(QUANTIDADE)";
+
+        // Preenche o campo de técnico e data no recibo
+        const formattedDate = data ? formatDate(data) : "";
+        document.getElementById("receiptTecnico").textContent =
+          tecnico || "(NOME DO TECNICO)";
+        document.getElementById("receiptData").textContent = formattedDate;
+
+        // Adiciona linhas adicionais ao recibo, se houver, em caixa alta
+        const additionalLines = document.querySelectorAll(
+          "#additionalLines .input-group"
+        );
+        const additionalReceiptLines = document.getElementById(
+          "additionalReceiptLines"
+        );
+        additionalReceiptLines.innerHTML = "";
+
+        additionalLines.forEach((line) => {
+          const newLineValue = line.querySelector("input").value.toUpperCase();
+          const p = document.createElement("p");
+          p.textContent = newLineValue;
+          additionalReceiptLines.appendChild(p);
+        });
+
+        // Exibe o recibo e o botão de impressão
+        document.getElementById("receipt").style.display = "block";
+        document.getElementById("printButton").style.display = "block";
+      }
+
+      function printReceipt() {
+        window.print();
+      }
+
+      // Função para adicionar novas linhas
+      function addNewLine() {
+        const container = document.getElementById("additionalLines");
+        const newLine = document.createElement("div");
+        newLine.classList.add("input-group");
+        newLine.innerHTML = `
+    <input type="text" placeholder="Novo Campo" />
+  `;
+        container.appendChild(newLine);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const today = new Date().toISOString().split("T")[0];
+        document.getElementById("data").value = today;
+      });
+    </script>
+  </body>
+</html>

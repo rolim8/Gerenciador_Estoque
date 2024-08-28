@@ -1,0 +1,214 @@
+/* Estilos do corpo da página */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+/* Estilos do container principal */
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 800px;
+}
+
+/* Estilos para o container dos botões */
+.buttons-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Estilos para o formulário */
+.form-fields {
+  background-color: white;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+/* Estilos para o recibo */
+.receipt {
+  margin: 20px auto;
+  background-color: white;
+  width: 100%;
+  max-width: 595px;
+  height: auto;
+  border: 2px solid black;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Estilos para o cabeçalho do recibo */
+.receipt-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+/* Estilos para o rodapé do recibo */
+.receipt-footer {
+  text-align: right;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Estilos para as informações da empresa */
+.company-info {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Estilos para as caixas de valor */
+.value-box {
+  border: 1px solid black;
+  padding: 10px;
+  width: 250px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* Estilos específicos para o elemento span dentro da caixa de valor */
+.value-box span {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* Estilos para o técnico do recibo */
+#receiptTecnico {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Adiciona o prefixo "R$" ao valor do recibo */
+#receiptValor::before {
+  content: "R$ ";
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+/* Estilos para os campos de data no formulário */
+#data {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 10px 0;
+  width: calc(100% - 20px);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+/* Estilos para o QR Code */
+.qr-code {
+  width: 150px;
+  height: 150px;
+  margin-left: auto;
+}
+
+/* Estilos para a assinatura */
+.sign {
+  width: auto;
+  height: 30px;
+  margin-left: auto;
+  margin-bottom: -7px;
+}
+
+/* Estilos para os campos de entrada */
+input {
+  margin: 10px 0;
+  width: calc(100% - 20px);
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Estilos para os campos de botões */
+button {
+  margin: 10px 5px;
+  width: calc(35% - 25px);
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Estilos para o logo */
+.logo {
+  border-radius: 0;
+}
+
+/* Estilos para o corpo do recibo */
+.receipt-body {
+  font-size: 16px;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+/* Estilos para os grupos de campos */
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+/* Estilos para os campos dentro dos grupos */
+.input-group input {
+  width: calc(
+    50% - 10px
+  ); /* Ajusta a largura para que os campos fiquem lado a lado */
+  margin-right: 10px;
+}
+
+.input-group input:last-child {
+  margin-right: 0;
+}
+
+/* Estilos para o dropdown do nome do técnico */
+select {
+  margin: 10px 0;
+  width: calc(100% - 20px);
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Estilos para a impressão do recibo */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #receipt,
+  #receipt * {
+    visibility: visible;
+  }
+  #receipt {
+    position: absolute;
+    left: 50%;
+    top: 15px;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 595px;
+    height: auto;
+    margin: 0;
+  }
+  @page {
+    margin: 0;
+  }
+  .no-print {
+    display: none;
+  }
+}
