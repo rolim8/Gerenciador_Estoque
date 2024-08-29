@@ -224,8 +224,6 @@ select {
 /* Estilos para as linhas adicionais do recibo */
 .receipt-additional-lines {
   margin-top: 10px;
-  margin-left: 100%;
-  margin-right: 100%;
 }
 
 .line-item {
