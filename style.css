@@ -23,6 +23,7 @@ body {
 .buttons-container {
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
 /* Estilos para o formulário */
@@ -93,14 +94,6 @@ body {
   font-size: 18px;
 }
 
-/* Adiciona o prefixo "R$" ao valor do recibo */
-#receiptValor::before {
-  content: "R$ ";
-  font-weight: bold;
-  font-size: 18px;
-  margin-right: 5px;
-}
-
 /* Estilos para os campos de data no formulário */
 #data {
   font-family: Arial, sans-serif;
@@ -109,21 +102,6 @@ body {
   width: calc(100% - 20px);
   border-radius: 4px;
   padding: 10px;
-}
-
-/* Estilos para o QR Code */
-.qr-code {
-  width: 150px;
-  height: 150px;
-  margin-left: auto;
-}
-
-/* Estilos para a assinatura */
-.sign {
-  width: auto;
-  height: 30px;
-  margin-left: auto;
-  margin-bottom: -7px;
 }
 
 /* Estilos para os campos de entrada */
@@ -144,25 +122,13 @@ button {
   font-size: 16px;
 }
 
-/* Estilos para o logo */
-.logo {
-  border-radius: 0;
-}
-
-/* Estilos para o corpo do recibo */
-.receipt-body {
-  font-size: 16px;
-  background-color: white;
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin: 10px 0;
-}
-
 /* Estilos para os grupos de campos */
 .input-group {
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 /* Estilos para os campos dentro dos grupos */
@@ -175,6 +141,31 @@ button {
 
 .input-group input:last-child {
   margin-right: 0;
+}
+
+/* Estilos para os campos dentro dos grupos */
+.input-group input {
+  width: 70%; /* Ajuste a largura do campo de entrada conforme necessário */
+  margin-right: 10px;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Estilos para os botões dentro dos grupos */
+.input-group button {
+  width: 25%; /* Ajusta a largura do botão conforme necessário */
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px; /* Ajusta o padding do botão */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px; /* Ajusta o tamanho da fonte do botão */
+}
+
+.input-group button:hover {
+  background-color: #ff1a1a;
 }
 
 /* Estilos para o dropdown do nome do técnico */
@@ -211,4 +202,37 @@ select {
   .no-print {
     display: none;
   }
+}
+
+/* Estilos para o campo de assinatura */
+.signature-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.signature-section hr {
+  border: 1px solid #000;
+  margin-bottom: 10px;
+}
+
+.signature-section p {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Estilos para as linhas adicionais do recibo */
+.receipt-additional-lines {
+  margin-top: 10px;
+  margin-left: 100%;
+  margin-right: 100%;
+}
+
+.line-item {
+  border: 1px solid black;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 24px;
+  line-height: 1.5;
 }

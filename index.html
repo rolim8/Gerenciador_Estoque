@@ -23,46 +23,25 @@
           <input type="date" id="data" />
         </div>
 
-        <!-- Campos para roteador, MAC, ONU e MAC -->
-        <div class="input-group">
-          <input type="text" id="roteador" placeholder="Roteador" />
-          <input type="text" id="macRoteador" placeholder="MAC do Roteador" />
-        </div>
-
-        <div class="input-group">
-          <input type="text" id="onu" placeholder="ONU" />
-          <input type="text" id="macOnu" placeholder="MAC da ONU" />
-        </div>
-
-        <!-- Campos para fios e conectores -->
-        <input
-          type="number"
-          id="fios"
-          placeholder="Quantidade de fios (metros)"
-        />
-        <input
-          type="number"
-          id="conectores"
-          placeholder="Quantidade de conectores"
-        />
-
         <!-- Botão para adicionar novas linhas -->
-        <button type="button" class="add-line-button" onclick="addNewLine()">
-          Adicionar Nova Linha
-        </button>
+        <div style="text-align: center">
+          <button type="button" class="add-line-button" onclick="addNewLine()">
+            Adicionar Nova Linha
+          </button>
+        </div>
 
         <!-- Seção para novas linhas -->
         <div id="additionalLines"></div>
 
         <!-- Botões -->
         <div class="buttons-container">
-          <button onclick="generateReceipt()">Gerar Relatorio</button>
+          <button onclick="generateReceipt()">Gerar Relatório</button>
           <button
             onclick="printReceipt()"
             id="printButton"
             style="display: none"
           >
-            Imprimir Relatorio
+            Imprimir Relatório
           </button>
         </div>
       </div>
@@ -96,23 +75,19 @@
             </div>
           </div>
         </div>
-
-        <div class="receipt-body">
-          <p>
-            ROTEADOR <span id="receiptRoteador"></span> com MAC:
-            <span id="receiptMacRoteador"></span>
-          </p>
-          <p>
-            ONU <span id="receiptOnu"></span> com MAC:
-            <span id="receiptMacOnu"></span>
-          </p>
-          <p><span id="receiptFios"></span> METROS DE FIO</p>
-          <p><span id="receiptConectores"></span> CONECTORES</p>
-
-          <!-- Se houver linhas adicionais -->
-          <div id="additionalReceiptLines"></div>
+        <br /><br />
+        <div id="receiptAdditionalLines" class="receipt-additional-lines">
+          <!-- Linhas adicionais do recibo -->
         </div>
+        <br /><br />
+        <!-- Campo para assinatura -->
+        <div class="signature-section">
+          <hr />
+          <p>ASSINATURA DE <span id="receiptTecnicoFooter">DANILO</span></p>
+        </div>
+        <br /><br />
 
+        <!-- Informações adicionais -->
         <div class="receipt-footer">
           Saída do estoque em <span id="receiptData">(DATA)</span>
         </div>
@@ -131,52 +106,30 @@
         // Obtém os valores dos campos do formulário e converte para caixa alta
         const tecnico = document.getElementById("tecnico").value.toUpperCase();
         const data = document.getElementById("data").value;
-        const roteador = document
-          .getElementById("roteador")
-          .value.toUpperCase();
-        const macRoteador = document
-          .getElementById("macRoteador")
-          .value.toUpperCase();
-        const onu = document.getElementById("onu").value.toUpperCase();
-        const macOnu = document.getElementById("macOnu").value.toUpperCase();
-        const fios = document.getElementById("fios").value.toUpperCase();
-        const conectores = document
-          .getElementById("conectores")
-          .value.toUpperCase();
-
-        // Preenche os campos do recibo com as informações do formulário
-        document.getElementById("receiptRoteador").textContent =
-          roteador || "(ROTEADOR)";
-        document.getElementById("receiptMacRoteador").textContent =
-          macRoteador || "(MAC DO ROTEADOR)";
-        document.getElementById("receiptOnu").textContent = onu || "(ONU)";
-        document.getElementById("receiptMacOnu").textContent =
-          macOnu || "(MAC DA ONU)";
-        document.getElementById("receiptFios").textContent =
-          fios || "(QUANTIDADE)";
-        document.getElementById("receiptConectores").textContent =
-          conectores || "(QUANTIDADE)";
 
         // Preenche o campo de técnico e data no recibo
         const formattedDate = data ? formatDate(data) : "";
         document.getElementById("receiptTecnico").textContent =
-          tecnico || "(NOME DO TECNICO)";
+          tecnico || "(NOME DO TÉCNICO)";
+        document.getElementById("receiptTecnicoFooter").textContent =
+          tecnico || "(NOME DO TÉCNICO)";
         document.getElementById("receiptData").textContent = formattedDate;
 
         // Adiciona linhas adicionais ao recibo, se houver, em caixa alta
         const additionalLines = document.querySelectorAll(
           "#additionalLines .input-group"
         );
-        const additionalReceiptLines = document.getElementById(
-          "additionalReceiptLines"
+        const receiptAdditionalLines = document.getElementById(
+          "receiptAdditionalLines"
         );
-        additionalReceiptLines.innerHTML = "";
+        receiptAdditionalLines.innerHTML = "";
 
         additionalLines.forEach((line) => {
           const newLineValue = line.querySelector("input").value.toUpperCase();
           const p = document.createElement("p");
+          p.className = "line-item"; // Adiciona a classe para estilizar a borda
           p.textContent = newLineValue;
-          additionalReceiptLines.appendChild(p);
+          receiptAdditionalLines.appendChild(p);
         });
 
         // Exibe o recibo e o botão de impressão
@@ -194,12 +147,20 @@
         const newLine = document.createElement("div");
         newLine.classList.add("input-group");
         newLine.innerHTML = `
-    <input type="text" placeholder="Novo Campo" />
+    <input type="text" placeholder="Novo Campo" style="width: 80%;" />
+    <button type="button" onclick="removeLine(this)">Remover</button>
   `;
         container.appendChild(newLine);
       }
 
+      // Função para remover uma linha
+      function removeLine(button) {
+        const container = document.getElementById("additionalLines");
+        container.removeChild(button.parentElement);
+      }
+
       document.addEventListener("DOMContentLoaded", () => {
+        // Define a data atual como padrão
         const today = new Date().toISOString().split("T")[0];
         document.getElementById("data").value = today;
       });
